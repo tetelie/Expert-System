@@ -3,6 +3,7 @@ package fr.tetelie.ia.rule;
 import fr.tetelie.ia.fact.IFact;
 
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 public class Rule {
 
@@ -46,4 +47,17 @@ public class Rule {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        String str = name + " : IF (";
+
+        StringJoiner sj = new StringJoiner("AND");
+        for(IFact fact : premises)
+        {
+            sj.add(fact.toString());
+        }
+
+        str += sj.toString() + ") THEN " + conclusion.toString();
+        return str;
+    }
 }
